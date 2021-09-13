@@ -17,7 +17,7 @@ Belgium
 Belize
 Benin
 Bhutan
-Bolivia (Plurinational State of)
+Bolivia
 Bosnia and Herzegovina
 Botswana
 Brazil
@@ -78,7 +78,7 @@ Hungary
 Iceland
 India
 Indonesia
-Iran (Islamic Republic of)
+Iran
 Iraq
 Ireland
 Israel
@@ -109,7 +109,7 @@ Marshall Islands
 Mauritania
 Mauritius
 Mexico
-Micronesia (Federated States of)
+Micronesia
 Monaco
 Mongolia
 Montenegro
@@ -145,7 +145,6 @@ Saint Kitts and Nevis
 Saint Lucia
 Saint Vincent and the Grenadines
 Samoa
-San Marino
 Sao Tome and Principe
 Saudi Arabia
 Senegal
@@ -169,7 +168,6 @@ Syrian Arab Republic
 Tajikistan
 Thailand
 Timor-Leste
-Togo
 Tokelau
 Tonga
 Trinidad and Tobago
@@ -184,7 +182,7 @@ United Republic of Tanzania
 United States of America
 Uzbekistan
 Vanuatu
-Venezuela (Bolivarian Republic of)
+Venezuela
 Viet Nam
 Yemen
 Zambia
