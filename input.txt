@@ -126,13 +126,11 @@ Niger
 Nigeria
 Niue
 North Macedonia
-Norway
 Oman
 Pakistan
 Palau
 Panama
 Papua New Guinea
-Paraguay
 Peru
 Philippines
 Poland
@@ -176,7 +174,6 @@ Tokelau
 Tonga
 Trinidad and Tobago
 Tunisia
-Turkey
 Turkmenistan
 Tuvalu
 Uganda
@@ -185,7 +182,6 @@ United Arab Emirates
 United Kingdom of Great Britain and Northern Ireland
 United Republic of Tanzania
 United States of America
-Uruguay
 Uzbekistan
 Vanuatu
 Venezuela (Bolivarian Republic of)
