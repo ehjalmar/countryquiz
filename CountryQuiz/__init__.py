@@ -3,15 +3,14 @@ from typing import List
 
 import azure.functions as func
 
+allCountries = []
+visitedCountries = []
+
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
     country = req.params.get('country')
-    howmany = req.params.get('howmany')
-    numberOfCountries = 12
-    if howmany:
-        numberOfCountries = int(howmany)
 
     if not country:
         try:
@@ -22,44 +21,67 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             country = req_body.get('country')
 
     if country:
-        
-        result = generateCountryList(country, numberOfCountries)
-        return func.HttpResponse(str(result))
+
+        allCountries.clear()
+        visitedCountries.clear()
+
+        loadCountries()
+
+        # Add the provided country to visitedCountries
+        visitedCountries.append(country)
+
+        while True:
+
+            try:
+                print(f"Finding next country after {country}...")
+
+                newCountry = getCountryBasedOnLastCharacter(
+                    country, visitedCountries)
+
+                print(f"Found country {newCountry}...")
+                visitedCountries.append(newCountry)
+
+                country = newCountry
+            except:
+                print("No more country options avilable... sorry")
+                break
+
+        return func.HttpResponse(str(visitedCountries))
+
     else:
         return func.HttpResponse(
-             "This HTTP triggered function executed successfully. Pass a country in the query string or in the request body for a proper response.",
-             status_code=200
+            "This HTTP triggered function executed successfully. Pass a country in the query string or in the request body for a proper response.",
+            status_code=200
         )
 
-def generateCountryList(startCountry, numberOfCountries: int) -> List:
-    file=open('input.txt', 'r')
+
+def last_letter(word):
+    return word[::-1]
+
+
+def loadCountries() -> None:
+    file = open('input.txt', 'r')
     lines = file.readlines()
-    cleanList = []
     for element in lines:
-        cleanList.append(element.strip())
+        allCountries.append(element.strip())
 
-    currentCountry = startCountry
-    lastChar = currentCountry[-1]
-    print("Starting country: " + currentCountry)
+    print(f"All {len(allCountries)} countries where loaded")
 
-    visited = [currentCountry]
 
-    i = 0
-    while i < numberOfCountries:
-            res = [idx for idx in cleanList if idx[0].lower() == lastChar.lower()]
-            #print("The list of matching first letter : " + str(res))
-            foundNew = False
-            foo = 0
-            while (foundNew == False):
-                if res[foo] not in visited:
-                    foundNew = True
-                    currentCountry = res[foo]
-                foo += 1
-            
-            visited.append(currentCountry)
-            print(currentCountry)
-            lastChar = currentCountry[-1]
-            i += 1
+def getCountryBasedOnLastCharacter(countryName: str, exclusions: List) -> str:
+    lastChar = countryName[-1]
 
-    return(visited)
+    possibleMatches = sorted([idx for idx in allCountries if idx[0].lower(
+    ) == lastChar.lower()], key=last_letter, reverse=True)
 
+    # Remove exclusions from list
+    print(f"Possible matched: {str(possibleMatches)}")
+    print(f"Exclusions: {str(exclusions)}")
+
+    filteredMatches = [x for x in possibleMatches if x not in exclusions]
+    print(f"Filtered matched: {str(filteredMatches)}")
+
+    if len(filteredMatches) != 0:
+        return filteredMatches[0]
+    else:
+        raise ValueError
