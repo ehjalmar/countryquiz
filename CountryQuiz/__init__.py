@@ -46,7 +46,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 print("No more country options avilable... sorry")
                 break
 
-        return func.HttpResponse(str(visitedCountries))
+        return func.HttpResponse('{"countries": ' + str(visitedCountries).replace("'",'"') + '}')
 
     else:
         return func.HttpResponse(
